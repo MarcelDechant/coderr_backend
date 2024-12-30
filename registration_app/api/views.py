@@ -3,6 +3,7 @@ from rest_framework.permissions import AllowAny
 from .serializers import RegistrationSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+from profile_app.models import Profile
 from rest_framework import status
 
 class RegistrationView(APIView):
@@ -48,5 +49,12 @@ def generate_profile(request, saved_account):
     user.last_name = last_name_registration
     user.save()
 
-
+    Profile.objects.create(
+        user=saved_account.pk,
+        username=saved_account.username,
+        first_name=first_name_registration,
+        last_name=last_name_registration,
+        email=saved_account.email,
+        type=profile_type,
+    )
     

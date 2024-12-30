@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'django_filters',
     'login_app',
     'registration_app',
+    'profile_app',
+    'base_info_app',
+   
 ]
 
 MIDDLEWARE = [
