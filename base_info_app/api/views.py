@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db.models import Avg
 from profile_app.models import Profile
+from offers_app.models import Offer
 from .serializers import BaseInfoSerializer
 from rest_framework.permissions import AllowAny
 
@@ -12,7 +13,7 @@ class BaseInfoView(APIView):
         review_count = 0
         average_rating = 0
         business_profile_count = Profile.objects.filter(type='business').count()
-        offer_count = 0
+        offer_count = Offer.objects.count()
 
         data = {
             "review_count": review_count,
