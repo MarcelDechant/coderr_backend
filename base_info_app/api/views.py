@@ -22,6 +22,7 @@ class BaseInfoView(APIView):
             "business_profile_count": business_profile_count,
             "offer_count": offer_count,
         }
-
+        
         serializer = BaseInfoSerializer(data)
         return Response(serializer.data)
+    

@@ -18,7 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from offers_app.api.urls import offer_patterns, offerdetail_patterns
+from orders_app.api.urls import order_patterns, order_count_patterns, completed_order_count_patterns
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +33,12 @@ urlpatterns = [
     path('api/base-info/', include('base_info_app.api.urls')), 
     path('api/profile/', include('profile_app.api.urls')),
     path('api/profiles/', include('profile_app.api.urls')),
-   
-]
+    path('api/reviews/', include('reviews_app.api.urls')), 
+    path('api/offers/', include((offer_patterns, 'offers_app'), namespace='offers')),
+    path('api/offerdetails/', include((offerdetail_patterns, 'offers_app'), namespace='offerdetails')),
+    path('api/orders/', include((order_patterns, 'orders_app'), namespace='orders')),
+    path('api/order-count/', include((order_count_patterns, 'orders_app'), namespace='order-count')),
+    path('api/completed-order-count/', include((completed_order_count_patterns, 'orders_app'), namespace='completed-order-count')),
+] + staticfiles_urlpatterns()
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
