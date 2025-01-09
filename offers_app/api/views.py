@@ -25,8 +25,6 @@ class OfferViewSet(viewsets.ModelViewSet):
             permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
 
-    from django.db.models import Q
-
     def get_queryset(self):
             queryset = Offer.objects.all()
             user_id = self.request.query_params.get('creator_id')
